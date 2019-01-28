@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  master:
+    image: redis:5.0.2
+    ports:
+     - 6379:6379
+  slave:
+    image: redis:5.0.2
+    command: redis-server --slaveof master 6379
+    deploy:
+      mode: replicated
+      replicas: 5
+  sentinel:
+    image: 's7anley/redis-sentinel-docker:3.0.7'
+    deploy:
+      mode: replicated
+      replicas: 3
+    environment:
+      - REDIS_MASTER_HOST=master

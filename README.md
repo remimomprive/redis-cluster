@@ -1,4 +1,4 @@
 # Cluster Redis
 
-cd docker
+cd docker;
 docker-compose --compatibility up
